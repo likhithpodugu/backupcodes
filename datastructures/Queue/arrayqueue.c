@@ -20,25 +20,35 @@ void dequeue(){
 void peek(){
     printf("\n%d",queue[front]);
 }
-void display(){
+void traversal(){
     for(int i = front;i<=rear;i++){
         printf("%d\t",queue[i]);
     }
 }
 
 int main(){
-    enqueue(28);
-    enqueue(25);
-    enqueue(24);
-    enqueue(23);
-    display();
-    dequeue();
-    peek();
-    enqueue(22);
-    enqueue(21);
-    printf("\n");
-    display();
-    dequeue();
-    printf("\n");
-    display();
+    int value,choice ;
+    int na = 1 ;
+    while(na){
+        printf("1. Enqueue\t2. Dequeue\t3. traversal\t4. Exit") ;
+        printf("\nEnter your choice: ");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1: printf("Enter inserted value: \n");
+            scanf("%d",&value);
+            enqueue(value) ;
+            break ;
+
+            case 2: dequeue() ;
+            break;
+
+            case 3: traversal();
+            break;
+
+            case 4: na = 0 ;
+
+            default: printf("\nWRONG SELECTION!!! TRY AGAIN");
+        }
+        }
+
 }
