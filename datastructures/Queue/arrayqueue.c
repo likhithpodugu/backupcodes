@@ -15,7 +15,13 @@ void enqueue(int a){
     }
 }
 void dequeue(){
-    front++ ;
+     if(top == -1){
+        printf("UNDERFLOW") ;
+    }                                               //removes top most element
+    else{
+        printf("Deleted : %d",queue[front]) ;
+        front++ ;
+    }
 }
 void peek(){
     printf("\n%d",queue[front]);
