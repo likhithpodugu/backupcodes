@@ -19,12 +19,12 @@ void dequeue(){
         printf("UNDERFLOW") ;
     }                                               //removes top most element
     else{
-        printf("Deleted : %d",queue[front]) ;
+        printf("Deleted : %d\n",queue[front]) ;
         front++ ;
     }
 }
 void peek(){
-    printf("\n%d",queue[front]);
+    printf("\n%d\n",queue[front]);
 }
 void traversal(){
     for(int i = front;i<=rear;i++){
