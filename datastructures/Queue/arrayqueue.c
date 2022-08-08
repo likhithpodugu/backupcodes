@@ -15,7 +15,7 @@ void enqueue(int a){
     }
 }
 void dequeue(){
-     if(top == -1){
+     if(front == -1){
         printf("UNDERFLOW") ;
     }                                               //removes top most element
     else{
