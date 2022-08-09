@@ -7,7 +7,7 @@ int main(){
     scanf("%d",&data);
 
     int flag = 0;
-    for(int i = 0;i<10;i++){
+    for(int i = 0;i<sizeof(a);i++){
         if(a[i] == data){
             printf("Element in index %d",i);
             flag = 1 ;
