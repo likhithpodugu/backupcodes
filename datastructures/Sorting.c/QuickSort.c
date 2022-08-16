@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-int position(int a[10] , int lb , int ub){
+int partesian(int a[10] , int lb , int ub){
     int pivot = a[lb] ;
     int start = lb ;
     int end = ub ;
@@ -30,7 +30,7 @@ return end ;
 void quicksort(int a[10],int lb,int ub){
     if(lb<ub){
         int loc ;
-        loc = position(a , lb,ub) ;
+        loc = partesian(a , lb,ub) ;
         quicksort(a,lb,loc-1);
         quicksort(a,loc+1,ub) ;
     }
