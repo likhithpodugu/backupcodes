@@ -9,8 +9,8 @@ int main(){
         temp = a[i];
         for( j = i -1; j>=0 && a[j] > temp; j--){
             a[j+1] = a[j] ;
+             a[j] = temp ;
         }
-        a[j+1] = temp ;
     }
     
         for(int k = 0;k<5;k++){
