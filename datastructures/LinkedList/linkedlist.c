@@ -18,7 +18,8 @@ int main(){
     scanf("%d",&(newnode->a));
     newnode->next = NULL ;
     if(head == 0){
-        head = newnode = temp;
+        head = newnode ;
+        temp = newnode ;
     }
     else{
         temp->next = newnode ;
