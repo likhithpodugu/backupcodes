@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h> 
+struct node{
+    int data ;
+    struct node* next ;
+};
+
+int main(){
+    struct node* newnode,*head,*temp ;
+    head = 0 ;
+    int n = 1 ;
+    while(n){
+    newnode = (struct node*)malloc(sizeof(struct node)) ;
+    printf("Enter your element: ") ;
+    scanf("%d",&newnode->data) ;
+    newnode->next = NULL;
+    if(head == 0){
+        temp = newnode ;
+        head = newnode ;
+    }
+    else{
+        temp->next = newnode ;
+        temp = temp->next ;
+    }
+    printf("CHOOSE 1/0 : ") ;
+    scanf("%d",&n) ;
+    }
+    //........................................
+    
+    temp = head ;
+    while(temp!=0){
+        printf("%d->",temp->data) ;
+        temp = temp->next ;
+    }
+    printf("...............") ;
+    //.......................................
+    printf("Searching element : ") ;
+    int se ;
+    scanf("%d",&se) ;
+    temp = head ;
+    int i = 0 ;
+    while(temp!=0){
+        if((temp->data) == se){
+            printf("Element at index %d",i) ;
+            break ;
+        }
+        temp = temp->next ;
+        i++ ;
+    }
+    //..................SORTING...................... 
+    struct node *i ,*j ;
+    int temp1 ;
+    i = head ;
+    for(i=head ;i!=NULL ;i=i->next){
+        for(j=i->next;j!=NULL ;j=j->next){
+            if((i->data)>(j->data)){
+                temp1 = i->data ;
+                i->data = j->data ;
+                j->data = temp1 ;
+            }
+        }
+    }    
+    //....................................
+        
+    temp = head ;
+    while(temp!=0){
+        printf("%d->",temp->data) ;
+        temp = temp->next ;
+    }
+}
