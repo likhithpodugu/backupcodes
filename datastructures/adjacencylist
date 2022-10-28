@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define max 4
+
+struct node{
+    int value ;
+    struct node* next ;
+} ;
+
+struct list{
+    struct node* head ;
+} ;
+
+struct list* adjlists[max] ;
+
+void addnode(int i , int j){
+    struct node* src ;
+    struct node* temp ;
+    struct node* a ;
+    if(adjlists[i]->head == NULL){
+        src = (struct node*)malloc(sizeof(struct node)) ;
+        src->value = i ;
+        src->next = NULL;
+        adjlists[i]->head = src ;
+    }
+    a = (struct node*)malloc(sizeof(struct node)) ;
+    a->value = j ;
+    a->next = NULL ;
+    temp = adjlists[i]->head ; //,
+    while(temp->next == NULL){
+        temp=temp->next ;
+    }
+    temp->next = a ;
+}
+
+void print(){
+   for(int i = 0 ;i<max ; i++){
+       struct node* q  = adjlists[i]->head ;
+       while(q){
+           printf("%d",q->value) ;
+           q=q->next ;
+       }
+       printf("\n") ;
+   } 
+}
+
+int main(){
+    for(int i = 0 ; i<max ;i++){
+        adjlists[i] = (struct list*)malloc(sizeof(struct list)) ;
+        adjlists[i]->head = NULL ;
+    }
+    addnode(0,1) ;
+    addnode(1,2) ;
+    addnode(1,3) ;
+    print() ;
+}
