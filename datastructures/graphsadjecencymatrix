@@ -1,0 +1,33 @@
+#include <stdio.h>
+#define s 3
+#define d 3
+void init(int matrix[s][d]){
+    for(int k = 0 ;k<s ;k++){
+        for(int l = 0 ;l<d;l++){
+            matrix[k][l] = 0 ;
+        }
+    }
+}
+
+void addnode(int matrix[s][d],int i ,int j){
+    matrix[i][j] = 1 ;
+    matrix[j][i] = 1 ;
+}
+
+void printmatrix(int matrix[s][d]){
+    for(int k = 0 ;k<s ;k++){
+        for(int l = 0 ;l<d;l++){
+            printf("%d",matrix[k][l]) ;
+        }
+        printf("\n") ;
+    }
+}
+
+int main(){
+    int array[3][3] ;
+    init(array) ;
+    addnode(array,0,1) ;
+    addnode(array,1,2) ;
+    addnode(array,0,2) ;
+    printmatrix(array) ;
+}
