@@ -1,0 +1,42 @@
+#include <iostream>
+#include <map>
+#include <queue>
+#include <list>
+using namespace std ;
+
+class graph{
+    public:
+    map <int , list<int> > g ;
+    
+    void addnode(int x , int y){
+        g[x].push_back(y) ;
+        g[y].push_back(x) ;
+    }
+    
+    void BFS(int src){
+        queue <int> q ;
+        map <int,int> v ;
+        q.push(src) ;
+        v[src] = true ;
+        while(!q.empty()){
+            int node = q.front() ;
+            q.pop() ;
+            cout<<node<<" " ;
+            for(int a : g[node]){
+                if(!v[a]){
+                    q.push(a) ;
+                    v[a] = true ;
+                }
+            }
+        }
+    }
+} ;
+
+int main(){
+    graph dsa ;
+    dsa.addnode(0,1) ;
+    dsa.addnode(1,2) ;
+    dsa.addnode(2,4) ;
+    dsa.addnode(2,3) ;
+    dsa.BFS(0) ;
+}
