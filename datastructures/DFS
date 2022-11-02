@@ -1,0 +1,51 @@
+#include <iostream>
+#include <list>
+#include <stack>
+#include <map>
+using namespace std ;
+
+class graph{
+    public:
+    map<int,list<int>>g ;
+    
+    void addnode(int x , int y){
+        g[x].push_back(y) ;
+        g[y].push_back(x) ;
+    }
+    
+    void DFS(int source){
+        stack <int> s ;
+        map <int,bool> vis ;
+        
+        s.push(source) ;
+        vis[source] = false ;
+        
+        while(!s.empty()){
+            int node = s.top() ;
+            s.pop() ;
+            
+            if(!vis[node]){
+                cout<<node<<" " ;
+                vis[node] = true ;
+            }
+            
+            for(int nbr : g[node]){
+                if(!vis[nbr]){
+                    s.push(nbr) ;
+                }
+            }
+        }
+    }
+} ;
+
+int main(){
+    graph dsa ;
+    dsa.addnode(1,0) ;
+    dsa.addnode(0,2) ;
+    dsa.addnode(2,1) ;
+    dsa.addnode(0,3) ;
+    dsa.addnode(1,4) ;
+    dsa.DFS(0) ;
+
+}
+
