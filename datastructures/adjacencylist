@@ -1,56 +1,37 @@
-#include <stdio.h>
-#include <stdlib.h>
-#define max 4
+#include <iostream>
+#include <list>
+using namespace std ;
 
-struct node{
-    int value ;
-    struct node* next ;
-} ;
-
-struct list{
-    struct node* head ;
-} ;
-
-struct list* adjlists[max] ;
-
-void addnode(int i , int j){
-    struct node* src ;
-    struct node* temp ;
-    struct node* a ;
-    if(adjlists[i]->head == NULL){
-        src = (struct node*)malloc(sizeof(struct node)) ;
-        src->value = i ;
-        src->next = NULL;
-        adjlists[i]->head = src ;
+class graph{
+    public:
+    int vertices ;
+    list <int> *l ;
+    
+    graph(int vertices){
+        this->vertices = vertices ;
+        l = new list<int>[vertices] ;
     }
-    a = (struct node*)malloc(sizeof(struct node)) ;
-    a->value = j ;
-    a->next = NULL ;
-    temp = adjlists[i]->head ; //,
-    while(temp->next == NULL){
-        temp=temp->next ;
+    
+    void addedge(int x ,int y){
+        l[y].push_back(x) ;
+        l[x].push_back(y) ;
     }
-    temp->next = a ;
-}
-
-void print(){
-   for(int i = 0 ;i<max ; i++){
-       struct node* q  = adjlists[i]->head ;
-       while(q){
-           printf("%d",q->value) ;
-           q=q->next ;
-       }
-       printf("\n") ;
-   } 
-}
+    
+    void printgraph(){
+        for(int i = 0 ; i<vertices ; i++){
+            cout<<"Vertices "<<i<<" -> " ;
+            for(int q :l[i]){
+                cout<<q<<" ";
+            }
+            cout<<endl ;
+        }
+    }
+} ;
 
 int main(){
-    for(int i = 0 ; i<max ;i++){
-        adjlists[i] = (struct list*)malloc(sizeof(struct list)) ;
-        adjlists[i]->head = NULL ;
-    }
-    addnode(0,1) ;
-    addnode(1,2) ;
-    addnode(1,3) ;
-    print() ;
+    graph dsa(3) ;
+    dsa.addedge(0,1) ;
+    dsa.addedge(1,2) ;
+    dsa.addedge(0,2) ;
+    dsa.printgraph() ;
 }
