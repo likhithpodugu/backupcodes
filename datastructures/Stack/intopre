@@ -1,0 +1,29 @@
+#include <iostream>
+#include <stack>
+using namespace std ;
+
+int main(){
+    string aa = "(a+b)" ;
+    stack <char> box ;
+    for(int i = 0 ;i<aa.length() ; i++){
+        box.push(aa[i]) ;
+    }
+    string result ;
+    for(int i = 0 ;i<aa.length();i++){
+        result = result + box.top() ;
+        box.pop() ;
+    }
+    string cc ;
+    for(int i = 0 ; i<result.length();i++){
+        if(result[i] == '('){
+            cc = cc + ")" ;
+        }
+        else if(result[i] == ')'){
+            cc = cc + "(" ;
+        }
+        else {
+            cc = cc + result[i] ;
+        }
+    }
+    cout<<cc<<endl ;
+}
