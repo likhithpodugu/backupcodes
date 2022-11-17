@@ -8,7 +8,7 @@ void enqueue(int x){
         rear = front = 0     ;
         queue[rear] = x ;
     }
-    else if((rear+1)%10  == front){
+    else if(front == 0 && rear == 9){
         printf("OVERFLOW");
     }
     else{
