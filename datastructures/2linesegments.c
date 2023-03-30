@@ -41,7 +41,8 @@ int doIntersect(struct point p,struct point q,struct point r ,struct point s){
     if(o1!=o2 && o3!=o4){
         return 11 ;
     }
-    else if(o1==0 && OnSegment(p,r,q)){
+    
+    if(o1==0 && OnSegment(p,r,q)){
         return 11 ;
     }
     else if(o2==0 && OnSegment(p,s,q)){
