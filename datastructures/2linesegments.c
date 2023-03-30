@@ -7,7 +7,12 @@ struct point{
 
 int slope(struct point p,struct point q){
     int m ;
-    m = (q.y - p.y) / (q.x - p.x) ;
+    if(q.x == p.x){
+        m = 99999 ;
+    }
+    else{
+        m = (q.y - p.y) / (q.x - p.x) ;
+    }
     return m ;
 }
 int OnSegment(struct point p,struct point q,struct point r){
