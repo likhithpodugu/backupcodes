@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+int max(int a,int b){
+    if(a>b){
+        return a ;
+    }
+    else{
+        return b ;
+    }
+}
+int lcs(char *x,char *y,int m,int n){
+    int l[m+1][n+1] ;
+    for(int i = 0 ;i<m+1 ;i++){
+        for(int j = 0 ;j<n+1;j++){
+            l[0][j] = 0 ;
+        }
+    }
+    for(int i = 0 ;i<m+1 ;i++){
+        for(int j = 0 ;j<n+1;j++){
+            l[j][0] = 0 ;
+        }
+    }
+    
+    for(int i = 1 ;i<m+1 ;i++){
+        for(int j = 1 ;j<n+1;j++){
+            if(x[i] == y[j]){
+                l[i][j] = l[i-1][j-1] + 1 ;
+            }
+            else{
+                l[i][j] = max(l[i-1][j],l[j][i-1]) ;
+            }
+        }
+    }
+    
+    return l[m][n];
+}
+
+int main(){
+    char x[] = "bacdb" ;
+    char y[] = "bdcb" ;
+    int m = strlen(x) ;
+    int n = strlen(y) ;
+    
+    int ans = lcs(x,y,m,n) ;
+    printf("%d",ans) ;
+}
