@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+int max(int a,int b){
+    if(a>b){
+        return a ;
+    }
+    else{
+        return b ;
+    }
+}
+
+int knapsack01(int *p,int *w,int bag , int n){
+    int l[n+1][bag+1] ;
+    for(int i = 0 ;i<n+1 ;i++){
+        for(int j = 0 ;j<bag+1 ;j++){
+            l[0][j] = 0 ;
+        }
+    }
+    for(int i = 0 ;i<n+1 ;i++){
+        for(int j = 0 ;j<bag+1 ;j++){
+            l[j][0] = 0 ;
+        }
+    }
+    for(int i = 0 ;i<n+1 ;i++){
+        for(int j = 0 ;j<bag+1 ;j++){
+            if(w[i] <= j ){
+                l[i][j] = max(l[i-1][j] , p[i] + l[i-1][j - w[i]]) ;
+            }
+            else{
+                l[i][j] = l[i-1][j] ;
+            }
+        }
+    }
+    
+    return l[n][bag] ;
+}
+
+int main(){
+    int bag ;
+    scanf("%d",&bag) ;
+    int n ;
+    scanf("%d",&n) ;
+    int profits[n] ;
+    int weights[n] ;
+    
+    for(int i = 0 ;i<n;i++){
+        scanf("%d",profits[i]) ;
+    }
+    for(int i = 0 ;i<n;i++){
+        scanf("%d",weights[i]) ;
+    }
+    
+    int ans = knapsack01(profits,weights,bag,n) ;
+    printf("%d",ans) ;
+}
