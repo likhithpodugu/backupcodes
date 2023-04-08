@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void swap(int *a ,int *b){
+    int temp ;
+    temp = *a;
+    *a=*b;
+    *b=temp ;
+}
+
+int partisian(int *a,int lb,int ub){
+    int start = lb ;
+    int end = ub ;
+    int pivot = a[lb] ;
+    while(start<end){
+        while(a[start] <= pivot){
+            start++ ;
+        }
+        while(pivot > a[end]){
+            end-- ;
+        }
+        if(start<end){
+            swap(&a[start],&a[end]) ;
+        }
+    }
+    
+    swap(&a[lb],&a[end]) ;
+    
+    return end ;
+}
+
+int partisian_r(int *a , int lb , int ub){
+    srand(time(0)) ;
+    int random = lb + rand() % (ub - lb) ;
+    swap(&a[random],&a[lb]) ;
+    
+    return partisian(a,lb,ub) ;
+}
+
+int quicksort(int *a,int lb , int ub){
+    if(lb<ub){
+        int loc = partisian_r(a,lb,ub) ;
+        quicksort(a,lb,loc-1) ;
+        quicksort(a,loc+1,ub) ;
+    }
+}
+
+int main(){
+    int a[10] = {34,11,97,66,87,34,20,28,18,100} ;
+    quicksort(a,0,9) ;
+    int i ;
+    for(i = 0 ;i<sizeof(a) ;i++){
+        printf("%d",a[i]) ;
+    }
+}
