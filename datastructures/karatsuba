@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <math.h>
+
+int max(int a,int b){
+    if(a>b){
+        return a ;
+    }
+    else{
+        return b ;
+    }
+}
+
+int power(int a,int b){
+    int c = round(pow(a,b)) ;
+    
+    return c;
+}
+int splitup(int a,int b){
+    return a/power(10,b) ;
+}
+
+int splitdown(int a,int b){
+    return a%power(10,b) ;
+}
+
+int digit(int a){
+    int count = 0 ;
+    while(a !=0){
+        a = a/10 ;
+        count++ ;
+    }
+    
+    return count ;
+}
+
+int karatsuba(int a,int b){
+    if(a<100 && b<100){
+        return a*b ;
+    }
+    else{
+        int w,x,y,z,m1,m ;
+        m1 = max(digit(a),digit(b)) ;
+        m = m1/2 ;
+        w = splitup(a,m);
+        x = splitup(b,m);
+        y = splitdown(a,m);
+        z = splitdown(b,m);
+        
+        int z0 = karatsuba(w,y) ;
+        int z1 = karatsuba(w,z) ;
+        int z2 = karatsuba(x,y) ;
+        int z3 = karatsuba(x,z) ;
+        
+        return ((z0*power(10,2*m)) + (z1 + z2)*power(10,m) + z3) ;
+    }
+}
+
+int main(){
+    int a ;
+    int b ;
+    scanf("%d",&a) ;
+    scanf("%d",&b) ; 
+    
+    int ans = karatsuba(a,b) ;
+    printf("%d",ans) ;
+}
