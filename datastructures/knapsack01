@@ -7,24 +7,28 @@ int max(int a,int b){
     else{
         return b ;
     }
-}
+};
 
-int knapsack01(int *p,int *w,int bag , int n){
+void knapsack(int *p , int *w , int bag){
+    int n = 3 ;
     int l[n+1][bag+1] ;
+    
     for(int i = 0 ;i<n+1 ;i++){
-        for(int j = 0 ;j<bag+1 ;j++){
+        for(int j = 0 ;j<bag+1 ; j++){
             l[0][j] = 0 ;
         }
     }
+    
     for(int i = 0 ;i<n+1 ;i++){
-        for(int j = 0 ;j<bag+1 ;j++){
+        for(int j = 0 ;j<bag+1 ; j++){
             l[j][0] = 0 ;
         }
     }
-    for(int i = 0 ;i<n+1 ;i++){
-        for(int j = 0 ;j<bag+1 ;j++){
-            if(w[i] <= j ){
-                l[i][j] = max(l[i-1][j] , p[i] + l[i-1][j - w[i]]) ;
+    
+    for(int i = 1 ;i<n+1 ;i++){
+        for(int j = 1 ;j<bag+1 ; j++){
+            if(w[i - 1] <= j ){
+                l[i][j] =  max(p[i -1] + l[i-1][j - w[i- 1]] ,l[i-1][j]  );
             }
             else{
                 l[i][j] = l[i-1][j] ;
@@ -32,24 +36,13 @@ int knapsack01(int *p,int *w,int bag , int n){
         }
     }
     
-    return l[n][bag] ;
+    printf("%d",l[n][bag]) ;
 }
 
 int main(){
-    int bag ;
-    scanf("%d",&bag) ;
-    int n ;
-    scanf("%d",&n) ;
-    int profits[n] ;
-    int weights[n] ;
+    int p[] = { 60, 100, 120 };
+    int w[] = { 10, 20, 30 };
+    int bag = 50; //220
     
-    for(int i = 0 ;i<n;i++){
-        scanf("%d",profits[i]) ;
-    }
-    for(int i = 0 ;i<n;i++){
-        scanf("%d",weights[i]) ;
-    }
-    
-    int ans = knapsack01(profits,weights,bag,n) ;
-    printf("%d",ans) ;
+    knapsack(p,w,bag) ;
 }
