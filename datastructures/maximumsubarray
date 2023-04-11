@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+int max(int a,int b,int c){
+    int temp ;
+    if(a>b){
+        temp = a ;
+    }
+    else{
+        temp = b ;
+    }
+    
+    if(temp>c){
+        return temp ;
+    }
+    else{
+        return c ;
+    }
+}
+
+int mca(int *a,int lb,int mid,int ub){
+    int leftsum = 0 ;
+    int rightsum = 0 ;
+    int sum = 0 ;
+    for(int i = mid ;i>=0;i--){
+        sum = a[i] + sum ;
+        if(leftsum < sum){
+            leftsum = sum ;
+        }
+    }
+    
+    sum = 0 ;
+    for(int i = mid ;i<ub;i++){
+        sum = sum + a[i] ;
+        if(rightsum < sum){
+            rightsum = sum ;
+        }
+    }
+    
+    return  max(leftsum,rightsum,leftsum+rightsum-a[mid]) ;
+}
+
+
+int msa(int *a,int lb,int ub){
+    if(lb<ub){
+        int mid = (lb+ub)/2;
+        int left_sum = msa(a,lb,mid-1) ;
+        int right_sum = msa(a,mid+1,ub) ;
+        int mid_sum = mca(a,lb,mid,ub) ;
+        
+        return max(left_sum,right_sum,mid_sum) ;
+    }
+} ;
+
+int main(){
+    int n ;
+    scanf("%d",&n) ;
+    int l[n] ;
+    for(int i = 0 ;i<n;i++){
+        scanf("%d",&l[i]) ;
+    }
+    
+    printf("%d",msa(l,0,n-1)) ;
+}
